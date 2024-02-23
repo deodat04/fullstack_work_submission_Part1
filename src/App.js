@@ -9,20 +9,20 @@ const Button = ({ click, text }) => {
 };
 
 const Display = ({ good, neutral, bad }) => {
+  if (good === 0 && neutral === 0 && bad === 0) {
+    return <p>No feedback given</p>;
+  }
   return (
     <div>
       <p>Good {good}</p>
       <p>Neutral {neutral}</p>
       <p>Bad {bad}</p>
+      <p>all : {good + neutral + bad}</p>
+      <p>average : {(good * 1 + neutral * 0 + bad * -1) / (good + neutral + bad)} </p>
+      <p>positive : { (good / (good + neutral + bad) * 100) } % </p>
     </div>
   );
 };
-
-const All = ( { good, neutral, bad } ) => <p>all : {good + neutral + bad}</p>;
-
-const Average = ( {good, neutral, bad} ) => <p>average : {(good * 1 + neutral * 0 + bad * -1) / (good + neutral + bad)} </p>;
-
-const Percent = ( {good, neutral, bad} ) => <p>positive : { (good / (good + neutral + bad) * 100) } % </p>;
 
 const App = () => {
   // enregistrer les clics de chaque bouton dans un état différent
@@ -40,9 +40,6 @@ const App = () => {
       <Button click={() => setBad(bad + 1)} text="bad" />
       <Hello title={stats} />
       <Display good={good} neutral={neutral} bad={bad} />
-      <All good={good} neutral={neutral} bad={bad} />
-      <Average good={good} neutral={neutral} bad={bad} />
-      <Percent good={good} neutral={neutral} bad={bad} />
     </div>
   );
 };
